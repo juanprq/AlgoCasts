@@ -7,6 +7,9 @@
 //   palindrome("abba") === true
 //   palindrome("abcdefg") === false
 
-function palindrome(str) {}
+// const palindrome = ([...chars]) => chars.join('') === chars.reverse().join('');
+
+// A not so obvious solution, in theory we can iterate only to the half
+const palindrome = ([...chars]) => chars.every((char, index) => char === chars[chars.length - 1 - index]);
 
 module.exports = palindrome;

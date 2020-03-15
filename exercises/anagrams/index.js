@@ -8,6 +8,39 @@
 //   anagrams('RAIL! SAFETY!', 'fairy tales') --> True
 //   anagrams('Hi there', 'Bye there') --> False
 
-function anagrams(stringA, stringB) {}
+const getCleanChars = (string) => string
+  .replace(/[^\w]/g, '')
+  .toLowerCase()
+  .split('');
+
+const getCharMap = (chars) => chars
+  .reduce((accum, key) => ({ ...accum, [key]: (accum[key] + 1 || 1) }), {});
+
+const isEqual = (mapA, mapB) => {
+  const keysA = Object.keys(mapA);
+  const keysB = Object.keys(mapB);
+
+  if (keysA.length !== keysB.length) return false;
+
+  return keysA.reduce((accum, key) => (accum && mapA[key] === mapB[key]), true);
+};
+
+// I think this is a shorters and simpler solution
+// function anagrams(stringA, stringB) {
+//   const charsA = getCleanChars(stringA);
+//   const charsB = getCleanChars(stringB);
+
+//   return charsA.sort().join('') === charsB.sort().join('');
+// }
+
+const anagrams = (stringA, stringB) => {
+  const charsA = getCleanChars(stringA);
+  const charsB = getCleanChars(stringB);
+
+  const charsMapA = getCharMap(charsA);
+  const charsMapB = getCharMap(charsB);
+
+  return isEqual(charsMapA, charsMapB);
+};
 
 module.exports = anagrams;

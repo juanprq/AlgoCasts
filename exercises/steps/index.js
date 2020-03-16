@@ -17,6 +17,42 @@
 //       '### '
 //       '####'
 
-function steps(n) {}
+// const buildStep = (n, current) =>
+//   '#'.repeat(current) + ' '.repeat(n - current);
+
+// function steps(n) {
+//   Array(n)
+//     .fill('')
+//     .map((_, index) => buildStep(n, index + 1))
+//     .forEach(v => console.log(v));
+// }
+
+// Matrix solution;
+// const steps = (n) => {
+//   const matrix = [];
+
+//   for (let i = 0; i < n; i++) {
+//     matrix[i] = [];
+
+//     for (let j = 0; j < n; j++) {
+//       matrix[i][j] = j <= i ? '#' : ' ';
+//     }
+//   }
+
+//   matrix.forEach(row => console.log(row.join('')));
+// };
+
+// A possible recursive solution
+const steps = (n, row = 0, stairs = '') => {
+  if (row === n) return;
+
+  if (stairs.length === n) {
+    console.log(stairs);
+    return steps(n, row + 1);
+  }
+
+  const char = stairs.length <= row ? '#' : ' ';
+  steps(n, row, stairs + char);
+};
 
 module.exports = steps;

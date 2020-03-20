@@ -8,6 +8,34 @@
 // Example:
 //   fib(4) === 3
 
-function fib(n) {}
+// iterative solution for fibonacci
+// function fib(n) {
+//   const series = [0, 1];
+
+//   for (let i = 2; i <= n; i++) {
+//     const next = series[i - 1] + series[i - 2];
+//     series.push(next);
+//   }
+
+//   return series[n];
+// }
+
+// recursive solution
+// const fib = n => {
+//   if (n <= 1) return n;
+
+//   return fib(n - 1) + fib(n - 2);
+// }
+
+// recursive with memo
+const memo = {};
+const fib = n => {
+  if (n <= 1) return n;
+  if (memo[n]) return memo[n];
+
+  const result = fib(n - 2) + fib(n - 1);
+  memo[n] = result;
+  return result
+}
 
 module.exports = fib;

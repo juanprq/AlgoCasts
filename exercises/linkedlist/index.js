@@ -95,6 +95,50 @@ class LinkedList {
 
     return current;
   }
+
+  removeAt(index) {
+    if (index === 0) {
+      this.head = this.head && this.head.next || null;
+    } else {
+      const prev = this.getAt(index - 1);
+
+      if (prev) {
+        prev.next = prev.next && prev.next.next;
+      }
+    }
+  }
+
+  insertAt(value, index) {
+    if (this.head === null || index === 0) {
+      this.insertFirst(value);
+    } else {
+
+      const prev = this.getAt(index - 1);
+      if (prev) {
+        prev.next = new Node(value, prev.next);
+      } else {
+        this.insertLast(value);
+      }
+    }
+  }
+
+  forEach(fn) {
+    let current = this.head;
+    let index = 0;
+    while(current) {
+      fn(current, index);
+      current = current.next;
+      index++;
+    }
+  }
+
+  *[Symbol.iterator]() {
+    let current = this.head;
+    while (current) {
+      yield(current);
+      current = current.next;
+    }
+  }
 }
 
 module.exports = { Node, LinkedList };
